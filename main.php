@@ -5,12 +5,17 @@ require_once 'vendor/autoload.php';
 
 $faker = Faker\Factory::create();
 
-echo $faker->name();
+use Firebase\JWT\JWT;
 
-echo $faker->email();
 
-echo $faker->text();
-echo "<BR>";
-echo $faker->phoneNumber("+972-##-###-####");
-echo "<BR>";
-echo $faker->jobTitle();
+$key = 'aac';
+$payload = [
+    'id'=>45678923,
+    'name'=>$faker->name(),
+    'email'=>$faker->email(),
+];
+
+
+$jwt = JWT::encode($payload, $key, 'HS256');
+
+echo $jwt;
